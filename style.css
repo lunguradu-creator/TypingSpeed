@@ -1,0 +1,12 @@
+﻿.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
+
+.sentence {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}

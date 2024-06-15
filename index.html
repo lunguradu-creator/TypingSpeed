@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Speed</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Typing Speed</h1>
+        <div class="card">
+            <div class="card-body">
+                <p id="sentence" class="sentence"></p>
+                <textarea id="input" class="form-control" rows="4" disabled></textarea>
+                <button id="startButton" class="btn btn-primary mt-3" onclick="startOrNextSentence()">Start Test</button>
+                <button id="resetButton" class="btn btn-secondary mt-3" onclick="resetTest()" style="display:none;">Reset</button>
+                <p id="timer" class="mt-3">Time elapsed: 0 seconds</p>
+                <p id="result" class="mt-3"></p>
+                <p id="finalResult" class="mt-3"></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
