@@ -1,10 +1,9 @@
-﻿const sentences = [
-    "Programarea este noua mea pasiune",
-    "Vacantele linistite sunt esentiale pentru dezvoltarea personala",
-    "Traieste-ti viata, bucura-te de fiecare clipa",
-    "Good vibes, good life."
+const sentences = [
+    "programare wellcode vacanta trei cuvinte care nu le stiu",
+    "vacantele linistite sunt esentiale pentru dezvoltarea personala mai incercam",
+    "tot ce trebuie sa fac e sa am rabdare acum probabil te gandesti cate cuvinte ai scris"
 ];
-let currentSentence = '';
+let currentSentence = sentences.join(" / ");
 let startTime;
 let timer;
 let elapsedTimer;
@@ -12,26 +11,17 @@ let testStarted = false;
 let totalCorrectWords = 0;
 let elapsedTime = 0;
 
-function startOrNextSentence() {
-    if (!testStarted) {
-        startTest();
-    } else {
-        calculateResult();
-        showNextSentence();
-    }
-}
-
 function startTest() {
     document.getElementById('result').innerText = '';
     document.getElementById('finalResult').innerText = '';
     document.getElementById('input').value = '';
     document.getElementById('input').disabled = false;
     document.getElementById('input').focus();
-    document.getElementById('startButton').innerText = 'Next phrase';
+    document.getElementById('startButton').style.display = 'none';
     document.getElementById('resetButton').style.display = 'inline-block';
     startTime = new Date().getTime();
     elapsedTimer = setInterval(updateElapsedTime, 1000);
-    showNextSentence();
+    document.getElementById('sentence').innerText = currentSentence;
     timer = setTimeout(endTest, 60000); // Test ends after 60 seconds, we can adjust the time.
     testStarted = true;
 }
@@ -44,26 +34,22 @@ function updateElapsedTime() {
     }
 }
 
-function showNextSentence() {
-    currentSentence = sentences[Math.floor(Math.random() * sentences.length)];
-    document.getElementById('sentence').innerText = currentSentence;
-}
-
 document.getElementById('input').addEventListener('input', function () {
     let inputText = this.value;
     let output = '';
-    for (let i = 0; i < inputText.length; ++i) {
-        if (i < currentSentence.length) {
+    for (let i = 0; i < currentSentence.length; ++i) {
+        if (i < inputText.length) {
             if (inputText[i] === currentSentence[i]) {
-                output += `<span class="correct">${inputText[i]}</span>`;
+                output += `<span class="correct">${currentSentence[i]}</span>`;
             } else {
-                output += `<span class="incorrect">${inputText[i]}</span>`;
+                output += `<span class="incorrect">${currentSentence[i]}</span>`;
             }
         } else {
-            output += `<span class="incorrect">${inputText[i]}</span>`;
+            output += currentSentence[i];
         }
     }
     document.getElementById('sentence').innerHTML = output;
+    calculateResult();
 });
 
 function endTest() {
@@ -86,7 +72,7 @@ function calculateResult() {
         }
     }
 
-    totalCorrectWords += correctWords;
+    totalCorrectWords = correctWords; // Update to count only the current result
     document.getElementById('result').innerText = `You typed ${totalCorrectWords} words correctly so far.`;
 }
 
@@ -98,10 +84,10 @@ function resetTest() {
     elapsedTime = 0;
     document.getElementById('result').innerText = '';
     document.getElementById('finalResult').innerText = '';
-    document.getElementById('sentence').innerText = '';
+    document.getElementById('sentence').innerText = currentSentence;
     document.getElementById('input').value = '';
     document.getElementById('input').disabled = true;
-    document.getElementById('startButton').innerText = 'Start Test';
+    document.getElementById('startButton').style.display = 'inline-block';
     document.getElementById('resetButton').style.display = 'none';
     document.getElementById('timer').innerText = 'Time elapsed: 0 seconds';
 }
